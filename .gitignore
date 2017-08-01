@@ -1,0 +1,7 @@
+# Builds
+*.o
+*.elf
+*.iso
+
+# Logs
+bochslog.txt
