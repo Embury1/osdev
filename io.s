@@ -1,5 +1,7 @@
 global outb             ; make the label outb visible outside this file
 
+section .text
+
 ; outb - send a byte to an I/O port
 ; stack: [esp + 8] the data byte
 ;        [esp + 4] the I/O port
