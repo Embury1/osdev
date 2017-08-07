@@ -1,4 +1,4 @@
-OBJECTS = io.o fb.o serial.o loader.o kmain.o
+OBJECTS = io.o fb.o serial.o gdt.o gdt_asm.o loader.o kmain.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LDFLAGS = -T link.ld -melf_i386
@@ -33,4 +33,4 @@ run: os.iso
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o kernel.elf os.iso
+	rm -rf *.o kernel.elf os.iso bochslog.txt com1.out

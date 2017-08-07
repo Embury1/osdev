@@ -1,11 +1,11 @@
-global load_gdt
+global gdt_load
 
 SEGSEL_KERNEL_CS equ 0x08
 SEGSEL_KERNEL_DS equ 0x10
 
 section .text
 
-load_gdt:
+gdt_load:
     mov     eax, [esp+4]
     lgdt    [eax]
     jmp     SEGSEL_KERNEL_CS:.reload_segments
