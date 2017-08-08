@@ -1,3 +1,5 @@
+global idt_load
+
 extern interrupt_handler
 
 section .text
@@ -44,4 +46,9 @@ enable_interrupts:
 
 disable_interrupts:
     cli
+    ret
+
+idt_load:
+    mov     eax, [esp+4]
+    lidt    eax
     ret
