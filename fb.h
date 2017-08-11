@@ -1,6 +1,8 @@
 #ifndef _FB_H_
 #define _FB_H_
 
+#include "lib/stdint.h"
+
 #define FB_BLACK                0
 #define FB_BLUE                 1
 #define FB_GREEN                2
@@ -27,9 +29,9 @@
 #define FB_HIGH_BYTE_COMMAND    14
 #define FB_LOW_BYTE_COMMAND     15
 
-void fb_write_cell(unsigned int i, char c, unsigned char bg, unsigned char fg);
-void fb_write(char *c, unsigned char bg, unsigned char fg);
-void fb_move_cursor(unsigned short col, unsigned short row);
+void fb_write_cell(uint32_t, uint8_t, uint8_t, uint8_t);
+void fb_write(uint8_t *, uint8_t, uint8_t);
+void fb_move_cursor(uint16_t, uint16_t);
 void fb_clear();
 
 #endif

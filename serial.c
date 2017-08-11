@@ -19,7 +19,7 @@
  *  @param divisor  The divisor
  */
 
-void serial_configure_baud_rate(unsigned short com, unsigned short divisor)
+void serial_configure_baud_rate(uint16_t com, uint16_t divisor)
 {
     outb(SERIAL_LINE_COMMAND_PORT(com), SERIAL_LINE_ENABLE_DLAB);
     outb(SERIAL_DATA_PORT_HIGH(com), (divisor >> 8) & 0x00FF);
@@ -33,7 +33,7 @@ void serial_configure_baud_rate(unsigned short com, unsigned short divisor)
  *
  *  @param com  The serial port to configure
  */
-void serial_configure_line(unsigned short com)
+void serial_configure_line(uint16_t com)
 {
     /* Bit:     | 7 | 6 | 5 4 3 | 2 | 1 0 |
      * Content: | d | b | prty  | s | dl  |
@@ -49,16 +49,16 @@ void serial_configure_line(unsigned short com)
  *  @return 0 if the transmit FIFO queue is not empty
  *          1 if the transmit FIFO queue is empty
  */
-int serial_is_transmit_fifo_empty(unsigned short com)
+int32_t serial_is_transmit_fifo_empty(uint16_t com)
 {
     /* 0x20 = 0010 0000 */
     return inb(SERIAL_LINE_STATUS_PORT(com)) & 0x20;
 }
 
-void serial_write(unsigned short com, char *c)
+void serial_write(uint16_t com, uint8_t *c)
 {
-    int i = 0;
-    char *p = 0;
+    uint32_t i = 0;
+    uint8_t *p = 0;
 
     while (*(p = c + i++) != '\0') {
         while (!serial_is_transmit_fifo_empty(com)) ;
