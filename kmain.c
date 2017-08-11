@@ -1,6 +1,7 @@
 #include "lib/stdint.h"
 #include "fb.h"
 #include "gdt.h"
+#include "idt.h"
 #include "serial.h"
 
 
@@ -15,4 +16,5 @@ void kmain()
     serial_write(SERIAL_COM1_BASE, (uint8_t *) "[DEBUG] COM1 initialized");
 
     gdt_init();
+    idt_init();
 }
