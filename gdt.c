@@ -25,33 +25,34 @@ struct gdt_ptr {
 } __attribute__((packed));
 typedef struct gdt_ptr gdt_ptr_t;
 
+static gdt_entry_t gdt_entries[GDT_ENTRIES_COUNT];
+
 void gdt_load(uint32_t);
 
-static void gdt_create_entry(gdt_entry_t *gdt_entry, uint8_t pl, uint8_t type)
+static void gdt_create_entry(uint32_t n, uint8_t pl, uint8_t type)
 {
-    gdt_entry->base_low      = (SEGMENT_BASE & 0xFFFF);
-    gdt_entry->base_mid      = (SEGMENT_BASE >> 16) & 0xFF;
-    gdt_entry->base_high     = (SEGMENT_BASE >> 24) & 0xFF;
+    gdt_entries[n].base_low      = (SEGMENT_BASE & 0xFFFF);
+    gdt_entries[n].base_mid      = (SEGMENT_BASE >> 16) & 0xFF;
+    gdt_entries[n].base_high     = (SEGMENT_BASE >> 24) & 0xFF;
 
-    gdt_entry->limit_low     = (SEGMENT_LIMIT & 0xFFFF);
+    gdt_entries[n].limit_low     = (SEGMENT_LIMIT & 0xFFFF);
 
-    gdt_entry->granularity   |= (0x01 << 7) | (0x01 << 6) | 0x0F;
-    gdt_entry->access = (0x01 << 7) | ((pl & 0x03) << 5) | (0x01 << 4) | (type & 0x0F);
+    gdt_entries[n].granularity   |= (0x01 << 7) | (0x01 << 6) | 0x0F;
+    gdt_entries[n].access = (0x01 << 7) | ((pl & 0x03) << 5) | (0x01 << 4) | (type & 0x0F);
 }
 
 void gdt_init()
 {
-    gdt_entry_t gdt_entries[GDT_ENTRIES_COUNT];
     gdt_ptr_t gdt_ptr;
 
     gdt_ptr.limit = sizeof(gdt_entry_t) * GDT_ENTRIES_COUNT;
     gdt_ptr.base = (uint32_t)&gdt_entries;
 
-    gdt_create_entry(&gdt_entries[0], 0, 0);
-    gdt_create_entry(&gdt_entries[1], PL0, CODE_RX_TYPE);
-    gdt_create_entry(&gdt_entries[2], PL0, DATA_RW_TYPE);
-    gdt_create_entry(&gdt_entries[3], PL3, CODE_RX_TYPE);
-    gdt_create_entry(&gdt_entries[4], PL3, DATA_RW_TYPE);
+    gdt_create_entry(0, 0, 0);
+    gdt_create_entry(1, PL0, CODE_RX_TYPE);
+    gdt_create_entry(2, PL0, DATA_RW_TYPE);
+    gdt_create_entry(3, PL3, CODE_RX_TYPE);
+    gdt_create_entry(4, PL3, DATA_RW_TYPE);
 
     gdt_load((uint32_t)&gdt_ptr);
 }
