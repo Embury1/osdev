@@ -2,6 +2,7 @@
 #include "fb.h"
 #include "gdt.h"
 #include "idt.h"
+#include "pic.h"
 #include "serial.h"
 
 
@@ -17,4 +18,5 @@ void kmain()
 
     gdt_init();
     idt_init();
+    pic_init();
 }
