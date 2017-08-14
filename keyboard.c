@@ -31,8 +31,6 @@ void kbd_callback(cpu_state_t cpu_state, idt_info_t info, stack_state_t stack_st
     UNUSED_ARGUMENT(info);
     UNUSED_ARGUMENT(stack_state);
 
-    serial_write(SERIAL_COM1_BASE, (uint8_t *) "[DEBUG] kbd_callback\n");
-
     if (kbd_buffer.count < KBD_BUFFER_SIZE) {
         *kbd_buffer.tail++ = kbd_read_scancode();
         ++kbd_buffer.count;

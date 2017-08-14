@@ -55,13 +55,10 @@ int32_t serial_is_transmit_fifo_empty(uint16_t com)
     return inb(SERIAL_LINE_STATUS_PORT(com)) & 0x20;
 }
 
-void serial_write(uint16_t com, uint8_t *c)
+void serial_write(uint16_t com, char c)
 {
-    uint32_t i = 0;
-    uint8_t *p = 0;
+    while (!serial_is_transmit_fifo_empty(com))
+        ;
 
-    while (*(p = c + i++) != '\0') {
-        while (!serial_is_transmit_fifo_empty(com)) ;
-        outb(SERIAL_DATA_PORT_LOW(com), *p);
-    }
+    outb(SERIAL_DATA_PORT_LOW(com), c);
 }

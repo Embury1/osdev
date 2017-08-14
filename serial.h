@@ -8,6 +8,6 @@
 void serial_configure_baud_rate(uint16_t, uint16_t);
 void serial_configure_line(uint16_t);
 int32_t serial_is_transmit_fifo_empty(uint16_t);
-void serial_write(uint16_t, uint8_t *);
+void serial_write(uint16_t, char);
 
 #endif

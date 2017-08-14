@@ -85,7 +85,6 @@ static void idt_create_gate(uint8_t idx, uint32_t handler, uint8_t type, uint8_t
     idt_gates[idx].segsel = SEGSEL_KERNEL_CS;
     idt_gates[idx].always0 = 0;
     idt_gates[idx].flags = (0x01 << 7) | ((pl & 0x03) << 5) | (0x01 << 3) | (0x01 << 2) | (0x01 << 1) | type;
-    serial_write(SERIAL_COM1_BASE, (uint8_t *) "[DEBUG] idt_create_gate\n");
 }
 
 void idt_init()
