@@ -21,33 +21,20 @@ static void _log_dec(uint32_t uival)
 static void _log_hex(uint32_t uival)
 {
     char digits[] = "0123456789ABCDEF";
-    int res = uival;
-    int rem = 0;
-    char hex[16] = "";
-    char *head = hex;
-    char *tail = hex;
+    char hex[8] = "";
+    char *p = hex;
+    int n = uival;
 
-    do {
-        rem = res % 16;
-        res = res / 16;
-        *head++ = digits[rem];
-    } while (res > 0);
-
-    *head-- = '\0';
-
-    while (tail < head) {
-        *tail ^= *head;
-        *head ^= *tail;
-        *tail ^= *head;
-        ++tail;
-        --head;
+    while (n) {
+        *p++ = digits[n % 16];
+        n /= 16;
     }
 
     serial_write(LOG_PORT, '0');
     serial_write(LOG_PORT, 'x');
 
-    for (head = hex; *head; head++)
-        serial_write(LOG_PORT, *head);
+    while (--p >= hex)
+        serial_write(LOG_PORT, *p);
 }
 
 static void _log_write(char *fmt, va_list args)
