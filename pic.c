@@ -46,6 +46,6 @@ void pic_init()
     outb(PIC2_DATA_PORT, PIC2_ICW4);
 
     /* Mask IRQs */
-    outb(PIC1_DATA_PORT, 0xEC);
+    outb(PIC1_DATA_PORT, 0xED);
     outb(PIC2_DATA_PORT, 0xFF);
 }

@@ -88,6 +88,7 @@ void log_debug(char *fn_name, char *fmt, ...)
     va_start(args, fmt);
     _log_write(fmt, args);
     va_end(args);
+    serial_write(LOG_PORT, '\n');
 }
 
 void log_info(char *fn_name, char *fmt, ...)
@@ -97,6 +98,7 @@ void log_info(char *fn_name, char *fmt, ...)
     va_start(args, fmt);
     _log_write(fmt, args);
     va_end(args);
+    serial_write(LOG_PORT, '\n');
 }
 
 void log_error(char *fn_name, char *fmt, ...)
@@ -106,4 +108,5 @@ void log_error(char *fn_name, char *fmt, ...)
     va_start(args, fmt);
     _log_write(fmt, args);
     va_end(args);
+    serial_write(LOG_PORT, '\n');
 }

@@ -6,3 +6,6 @@
 # Logs
 bochslog.txt
 *.out
+
+# Temp files
+~$keys.xlsx
