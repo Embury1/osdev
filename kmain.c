@@ -24,11 +24,11 @@ void kmain()
     pic_init();
     kbd_init();
 
-    enable_interrupts();
-
     log_debug("kmain", "debug\n");
     log_info("kmain", "info\n");
     log_error("kmain", "error\n");
 
-    log_debug("kmain", "%s %x %c\n", "string", 123, 'c');
+    log_debug("kmain", "%s %x %c %d\n", "string", 123, 'c', 2335);
+
+    enable_interrupts();
 }

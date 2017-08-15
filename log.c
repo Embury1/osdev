@@ -5,8 +5,17 @@
 
 static void _log_dec(uint32_t uival)
 {
-    char digits[] = "0123456789";
-    
+    char dec[10] = "";
+    char *p = dec;
+    int n = uival;
+
+    while (n) {
+        *p++ = '0' + (n % 10);
+        n /= 10;
+    }
+
+    while (--p >= dec)
+        serial_write(LOG_PORT, *p);
 }
 
 static void _log_hex(uint32_t uival)
@@ -63,6 +72,8 @@ static void _log_write(char *fmt, va_list args)
                 serial_write(LOG_PORT, *sval);
             break;
         case 'd':
+            uival = va_arg(args, uint32_t);
+            _log_dec(uival);
             break;
         case 'x':
             uival = va_arg(args, uint32_t);
