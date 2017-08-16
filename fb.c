@@ -1,18 +1,18 @@
 #include "io.h"
 #include "fb.h"
 
-uint8_t *fb = (uint8_t *) 0x000B8000;
+char *fb = (char *) 0x000B8000;
 
-void fb_write_cell(uint32_t i, uint8_t c, uint8_t bg, uint8_t fg)
+void fb_write_cell(uint32_t i, char c, uint8_t bg, uint8_t fg)
 {
     fb[i * 2] = c;
     fb[i * 2 + 1] = ((bg & 0x0F) << 4) | (fg & 0x0F);
 }
 
-void fb_write(uint8_t *c, uint8_t bg, uint8_t fg)
+void fb_write(char *c, uint8_t bg, uint8_t fg)
 {
     uint32_t i = 0;
-    uint8_t *p = 0;
+    char *p = 0;
     while (*(p = c + i) != '\0')
         fb_write_cell(i++, *p, bg, fg);
 }

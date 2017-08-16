@@ -29,8 +29,8 @@
 #define FB_HIGH_BYTE_COMMAND    14
 #define FB_LOW_BYTE_COMMAND     15
 
-void fb_write_cell(uint32_t, uint8_t, uint8_t, uint8_t);
-void fb_write(uint8_t *, uint8_t, uint8_t);
+void fb_write_cell(uint32_t, char, uint8_t, uint8_t);
+void fb_write(char *, uint8_t, uint8_t);
 void fb_move_cursor(uint16_t, uint16_t);
 void fb_clear();
 
