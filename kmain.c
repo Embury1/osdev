@@ -13,7 +13,7 @@ void kmain()
     disable_interrupts();
 
     fb_clear();
-    fb_write((uint8_t *) "Welcome to EmbOS", FB_BLACK, FB_LIGHT_BLUE);
+    fb_write("Welcome to EmbOS", FB_BLACK, FB_LIGHT_BLUE);
     fb_move_cursor(16, 0);
 
     serial_configure_baud_rate(SERIAL_COM1_BASE, 0x03);
