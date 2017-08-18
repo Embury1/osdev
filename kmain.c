@@ -1,3 +1,4 @@
+#include "lib/stddef.h"
 #include "lib/stdint.h"
 #include "fb.h"
 #include "gdt.h"
@@ -7,9 +8,15 @@
 #include "serial.h"
 #include "interrupt.h"
 #include "log.h"
+#include "multiboot.h"
 
-void kmain()
+typedef void (*call_module_t) (void);
+
+void kmain(uint32_t ebx)
 {
+    call_module_t start_program = NULL;
+    multiboot_info_t *mb_info = (multiboot_info_t *) ebx;
+
     disable_interrupts();
 
     fb_clear();
@@ -25,4 +32,9 @@ void kmain()
     kbd_init();
 
     enable_interrupts();
+
+    if (mb_info->flags && mb_info->mods_count == 1) {
+        start_program = (call_module_t) mb_info->mods_addr;
+        start_program();
+    }
 }
