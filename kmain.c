@@ -33,8 +33,17 @@ void kmain(uint32_t ebx)
 
     enable_interrupts();
 
-    if (mb_info->flags && mb_info->mods_count == 1) {
-        start_program = (call_module_t) mb_info->mods_addr;
+    if ((mb_info->flags & 4) == 4 && mb_info->mods_count == 1) {
+        uint32_t *module = (uint32_t *) mb_info->mods_addr;
+        log_debug("kmain", "module found at address %x", module[0]);
+        log_debug("kmain", "what is this set to? %x", module[1]);
+        if (module[2])
+            log_debug("kmain", "%s", module[2]);
+        start_program = (call_module_t) module;
         start_program();
+    } else if (mb_info->mods_count > 1) {
+        log_error("kmain", "more than one module found");
+    } else {
+        log_error("kmain", "no modules found");
     }
 }
