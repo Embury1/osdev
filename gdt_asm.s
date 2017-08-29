@@ -1,4 +1,5 @@
 global gdt_load
+global tss_load
 
 SEGSEL_KERNEL_CS equ 0x08
 SEGSEL_KERNEL_DS equ 0x10
@@ -17,4 +18,9 @@ gdt_load:
     mov     es, ax
     mov     gs, ax
     mov     fs, ax
+    ret
+
+tss_load:
+    mov     ax, [esp+4]
+    ltr     ax
     ret

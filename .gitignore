@@ -5,7 +5,8 @@
 
 # Logs
 bochslog.txt
-*.out
+stdout.txt
+com1.out
 
 # Temp files
 ~$keys.xlsx

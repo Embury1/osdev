@@ -5,7 +5,8 @@ extern kmain
 
 MAGIC_NUMBER    equ 0x1BADB002                          ; define the magic number constant
 ALIGN_MODULES   equ 0x00000001                          ; tell GRUB to align modules
-CHECKSUM        equ -(MAGIC_NUMBER + ALIGN_MODULES)     ; calculate the checksum
+FLAGS           equ ALIGN_MODULES
+CHECKSUM        equ -(MAGIC_NUMBER + FLAGS)             ; calculate the checksum
                                                         ; (magic number + checksum + flags should equal 0)
 
 KERNEL_STACK_SIZE       equ 4096                        ; size of stack in bytes

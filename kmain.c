@@ -23,13 +23,13 @@ void kmain(uint32_t ebx)
     fb_write("Welcome to EmbOS", FB_BLACK, FB_LIGHT_BLUE);
     fb_move_cursor(16, 0);
 
-    serial_configure_baud_rate(SERIAL_COM1_BASE, 0x03);
-    serial_configure_line(SERIAL_COM1_BASE);
-
     gdt_init();
     idt_init();
     pic_init();
     kbd_init();
+    
+    serial_configure_baud_rate(SERIAL_COM1_BASE, 0x03);
+    serial_configure_line(SERIAL_COM1_BASE);
 
     enable_interrupts();
 
