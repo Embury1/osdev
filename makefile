@@ -9,6 +9,7 @@ all: kernel.elf
 
 kernel.elf: $(OBJECTS)
 	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
+	./symbols.sh kernel.elf
 
 os.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf
