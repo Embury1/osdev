@@ -1,11 +1,12 @@
+!bochsrc.txt
+
 # Builds
 *.o
 *.elf
 *.iso
 
 # Logs
-bochslog.txt
-stdout.txt
+*.txt
 com1.out
 
 # Temp files
