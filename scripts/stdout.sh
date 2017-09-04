@@ -1,2 +1,2 @@
 #!/bin/sh
-make run |& tee $1
+make run |& tee ../logs/$1
