@@ -20,7 +20,7 @@ void kmain(uint32_t ebx)
     disable_interrupts();
 
     fb_clear();
-    fb_write("Welcome to EmbOS", FB_BLACK, FB_LIGHT_BLUE);
+    fb_write("Welcome to PatOS", FB_BLACK, FB_LIGHT_BLUE);
     fb_move_cursor(16, 0);
 
     gdt_init();
