@@ -20,9 +20,16 @@ void kmain(uint32_t ebx)
     disable_interrupts();
 
     fb_clear();
-    fb_write("Welcome to PatOS", FB_BLACK, FB_LIGHT_BLUE);
-    fb_move_cursor(16, 0);
-
+    fb_write(
+       "MMMMMMMMMs                aMM     aMMMMMMMMt     MMMMMMMMM\n\
+MMMM  MMMMt              aMMt    MMMP    MMMt   MMMM    TMM\n\
+MMMM  MMMMt  MMMMMMMMM  MMMMMMM MMMM      MMMM  TMMMMMMo\n\
+MMMMMMMMMM         MMM   MMMM   MMMM      MMMM    TMMMMMMMM\n\
+MMMMMMP      aMMMMMMMM   MMMM   MMMM      MMMM         MMMMS\n\
+MMMM        MMMN   MMM   MMMM    MMMt    MMMM   MMMt   NMMMT\n\
+MMMM        MMMMMMMMMM   MMMMMM   MMMMMMMMMM     MMMMMMMMMT\n", 
+         FB_BLACK, FB_LIGHT_BLUE);
+    
     gdt_init();
     idt_init();
     pic_init();

@@ -8,5 +8,5 @@ log:                logs/bochslog.txt
 clock:              sync=realtime, time0=local
 cpu:                count=1, ips=1000000
 panic:              action=ask
-com1:               enabled=1, mode=file, dev=com1.out
+com1:               enabled=1, mode=file, dev=logs/com1.out
 debug_symbols:      file=kernel.elf.sym

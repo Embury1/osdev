@@ -20,18 +20,7 @@
 #define FB_LIGHT_BROWN          14
 #define FB_WHITE                15
 
-#define FB_COLUMNS              80
-#define FB_ROWS                 25
-
-#define FB_COMMAND_PORT         0x3D4
-#define FB_DATA_PORT            0x3D5
-
-#define FB_HIGH_BYTE_COMMAND    14
-#define FB_LOW_BYTE_COMMAND     15
-
-void fb_write_cell(uint32_t, char, uint8_t, uint8_t);
 void fb_write(char *, uint8_t, uint8_t);
-void fb_move_cursor(uint16_t, uint16_t);
 void fb_clear();
 
 #endif
