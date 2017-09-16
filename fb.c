@@ -59,7 +59,7 @@ static void fb_write_cell(char c, uint8_t bg, uint8_t fg)
 void fb_write(char *c, uint8_t bg, uint8_t fg)
 {
     char *p = c;
-    for (cursor_pos = 0; *p != '\0'; p++) {
+    for (; *p != '\0'; p++) {
         if (*p == '\n') {
             new_line();
             carriage_return();
